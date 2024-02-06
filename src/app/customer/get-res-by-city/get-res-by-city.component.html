@@ -1,0 +1,59 @@
+<div class="container">
+  <label>Select City:</label>
+  <select [(ngModel)]="selectedCity" (change)="filterRestaurantsByCity(selectedCity)">
+    <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+  </select>
+
+  <label>Select Restaurant:</label>
+  <select [(ngModel)]="selectedRestaurant" (change)="fetchMenuItems()">
+    <option *ngFor="let restaurant of filteredRestaurants" [ngValue]="restaurant">{{ restaurant.name}}</option>
+  </select>
+
+  <div *ngIf="selectedRestaurant" class="selected-restaurant-box">
+    <h3>Selected Restaurant</h3>
+    <p>Name: {{selectedRestaurant.name}}</p>
+    
+    <label>Select Menu Item:</label>
+    <select [(ngModel)]="selectedMenuItem" (change)="onSelectMenuItem(selectedMenuItem)">
+      <option *ngFor="let menuItem of filteredMenuItems" [ngValue]="menuItem">{{ menuItem.name }}</option>
+    </select>
+
+    <div *ngIf="selectedMenuItem" class="selected-menu-item-box">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th>Name</th>
+            <th>image</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ selectedMenuItem.name }}</td>
+            <td>
+              <img src="http://localhost:5145/Resources/Images/{{selectedMenuItem.image}}" alt="" width="100" height="100">
+            </td>
+            <td>{{ selectedMenuItem.description }}</td>
+            <td>{{ selectedMenuItem.price }}</td>
+            <td>
+              <select [(ngModel)]="selectedMenuItem.quantity">
+                <option *ngFor="let quantityOption of quantityOptions" [value]="quantityOption">{{ quantityOption }}</option>
+              </select>
+            </td>
+           
+            <td>
+              <button class="btn btn-primary" (click)="selectedMenuItem && AddToOrder(selectedMenuItem)">Buy</button>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div *ngIf="orderPlacementSuccess" class="order-success-message">
+  <p>Order placed successfully!</p>
+</div>

@@ -1,0 +1,30 @@
+<!-- menuitem-list.component.html -->
+
+<div class="container">
+    <h2>Menu Item List</h2>
+    <table class="table" border="1">
+      <thead>
+        <tr>
+          <th>Menu Item ID</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Restaurant ID</th>
+          <th>Image</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let menuitem of menu">
+          <td>{{ menuitem.menuItemId }}</td> 
+          <td>{{ menuitem.name }}</td>
+          <td>{{ menuitem.description }}</td>
+          <td>{{ menuitem.price }}</td>
+          <td>{{ menuitem.restaurantId }}</td>
+          <td>
+            <img src="http://localhost:5145/Resources/Images/{{menuitem.image}}" alt="" width="100" height="100">
+        </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

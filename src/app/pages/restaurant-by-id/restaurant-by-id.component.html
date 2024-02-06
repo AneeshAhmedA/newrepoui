@@ -1,0 +1,48 @@
+
+<div class="container">
+    <table class="table" style="width: 500px;">
+      <tr>
+        <td>
+          <label>Restaurant ID</label>
+        </td>
+        <td>
+          <input type="number" [(ngModel)]="restaurantId" class="form-control">
+        </td>
+        <td>
+          <button class="btn btn-primary" (click)="search()">Search</button>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          <span style="color: red;">{{errMsg}}</span>
+        </td>
+      </tr>
+    </table>
+    <hr>
+    <table class="table" *ngIf="isRestaurantExist">
+      <tr>
+        <td>Restaurant ID</td>
+        <td>
+          <input type="number" [(ngModel)]="restaurant.restaurantId" readonly class="form-control">
+        </td>
+      </tr>
+      <tr>
+        <td>Restaurant Name</td>
+        <td>
+          <input type="text" [(ngModel)]="restaurant.name" readonly class="form-control">
+        </td>
+      </tr>
+      <tr>
+        <td>City ID</td>
+        <td>
+          <input type="number" [(ngModel)]="restaurant.cityId" class="form-control">
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <button class="btn btn-primary" (click)="delete()">Delete</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+  

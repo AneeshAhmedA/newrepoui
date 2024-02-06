@@ -1,0 +1,130 @@
+/* styles.css */
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background-color: #343a40;
+    padding: 0.5rem 1rem; /* Adjusted padding for a smaller header */
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.navbar-toggler-icon {
+    color: #ffffff;
+}
+
+.navbar-nav .nav-link {
+    color: #ffffff;
+    margin-right: 15px;
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    text-decoration: underline;
+    color: #ffcc00;
+}
+
+/* Super highlight box for navigation items */
+.navbar-nav .nav-item {
+    position: relative;
+}
+
+.navbar-nav .nav-item::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 4px; /* Highlight box height */
+    bottom: 0;
+    background: #ffcc00;
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease;
+}
+
+.navbar-nav .nav-item:hover::before {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.main {
+    padding: 20px;
+    margin-top: 50px; /* Adjusted margin-top for content */
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    font-weight: bold;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    background: linear-gradient(to right, #007bff, #0056b3);
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+.navbar a {
+  text-decoration: none;
+  margin: 0 10px;
+  color: #333;
+}
+
+.navbar a.active {
+  font-weight: bold;
+  color: #ffcc00;
+}
+
+.btn:hover {
+    background: linear-gradient(to right, #0056b3, #007bff);
+}
+.main {
+    flex: 1; /* Grow to fill available space */
+    padding: 20px;
+    margin-top: 50px;
+}
+
+.footer {
+    background-color: #343a40;
+    color: #ffffff;
+    text-align: center;
+    padding: 0px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Add more styles as needed */

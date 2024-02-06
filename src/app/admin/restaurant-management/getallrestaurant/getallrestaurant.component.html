@@ -1,0 +1,32 @@
+<!-- restaurant-list.component.html -->
+
+<div class="container">
+  <h2>Restaurant List</h2>
+  <table class="table" border="1">
+    <thead>
+      <tr>
+        <th>Restaurant ID</th>
+        <th>Restaurant Name</th>
+        <th>Description</th>
+        <th>City ID</th>
+        <th>Actions</th>
+        <th>Image</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let restaurant of restaurants">
+        <td>{{ restaurant.restaurantId }}</td>
+        <td>{{ restaurant.name }}</td>
+        <td>{{ restaurant.description }}</td>
+        <td>{{ restaurant.cityId }}</td>
+        <td>
+          <button *ngIf="restaurant?.restaurantId !== undefined" (click)="activateRestaurant(restaurant?.restaurantId ?? 0)">Activate</button>
+          <button *ngIf="restaurant?.restaurantId !== undefined" (click)="deactivateRestaurant(restaurant?.restaurantId ?? 0)">Deactivate/Delete</button>
+        </td>
+        <td>
+          <img *ngIf="restaurant?.image !== null" src="http://localhost:5145/Resources/Images/{{ restaurant?.image }}" alt="" width="100" height="100">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

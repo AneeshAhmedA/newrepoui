@@ -1,0 +1,141 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(120deg, #ffac81, #ff928b); /* Updated background gradient */
+  color: #2e2e2e;
+  transition: background 0.3s ease;
+}
+
+.home-container {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+header img {
+  max-width: 120px; /* Increased the maximum width of the logo */
+  height: auto;
+  margin-right: 10px;
+  transition: transform 0.3s ease;
+}
+
+header img:hover {
+  transform: scale(1.2); /* Adjusted the scale on hover */
+}
+
+h1 {
+  font-size: 2em; /* Increased the font size of the restaurant name */
+  margin: 0;
+  color: #ff8a5c;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Added a subtle text shadow */
+}
+
+.wow-text {
+  margin: 0;
+  font-size: 3em;
+  font-weight: bold;
+  color: #ff8a5c;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  animation: bounce 1.5s infinite;
+  transition: color 0.3s ease;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+  }
+  40% {
+      transform: translateY(-15px);
+  }
+  60% {
+      transform: translateY(-7px);
+  }
+}
+
+.hero-section {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #333;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-section h2 {
+  font-family: 'Poppins', sans-serif;
+  color: #ff8a5c;
+  transition: color 0.3s ease;
+}
+
+.features-section {
+  margin-top: 20px;
+}
+
+.feature {
+  background-color: #ff8a5c;
+  color: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature:hover {
+  background-color: #e57083;
+}
+
+.call-to-action {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.call-to-action h2 {
+  font-family: 'Montserrat', sans-serif;
+  color: #ff8a5c;
+  transition: color 0.3s ease;
+}
+
+p {
+  font-size: 1.2em;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  margin: 0 10px;
+  text-decoration: none;
+  color: #fff;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #ff8a5c;
+}
+
+.btn-secondary {
+  background-color: #5f6d7c;
+}
+
+.btn:hover {
+  background-color: #e57e4d;
+  transform: scale(1.05);
+}

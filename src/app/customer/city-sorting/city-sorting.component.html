@@ -1,0 +1,23 @@
+<!-- city-sorting.component.html -->
+<div class="container mt-4">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="citySearch" class="h5">Search City:</label>
+          <div class="input-group">
+            <input type="text" id="citySearch" class="form-control" [(ngModel)]="citySearchTerm" placeholder="Enter city name" (input)="filterCities()">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button" (click)="clearSearch()">Clear</button>
+            </div>
+          </div>
+        </div>
+  
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-action" *ngFor="let city of filteredCities" (click)="navigateToRestaurantList(city)">
+            {{ city }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  

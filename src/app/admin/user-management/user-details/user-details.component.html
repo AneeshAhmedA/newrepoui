@@ -1,0 +1,49 @@
+<div class="container">
+    <table class="table" style="width: 500px;">
+      <tr>
+        <td>
+          <label>User ID</label>
+        </td>
+        <td>
+          <input type="number" [(ngModel)]="userId" class="form-control">
+        </td>
+        <td>
+          <button class="btn btn-primary" (click)="search()">Search</button>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          <span style="color: red;">{{errMsg}}</span>
+        </td>
+      </tr>
+    </table>
+    <hr>
+    <table class="table" *ngIf="isUserExist">
+      <tr>
+        <td>User ID</td>
+        <td>
+          <input type="number" [(ngModel)]="user.userID" readonly class="form-control">
+        </td>
+      </tr>
+      <tr>
+        <td>Name</td>
+        <td>
+          <input type="text" [(ngModel)]="user.name"  class="form-control">
+        </td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td>
+          <input type="text" [(ngModel)]="user.email"  class="form-control">
+        </td>
+      </tr>
+      <!-- Add more input fields for other user properties as needed -->
+      <tr>
+        <td colspan="2">
+          <button class="btn btn-primary" (click)="edit()">Edit</button>
+          <button class="btn btn-primary" (click)="delete()">Delete</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+  

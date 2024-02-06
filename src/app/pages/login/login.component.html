@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="register-form" style="width: 50%;">
+        <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text" class="form-control" name="useremail" [(ngModel)]="email" required
+                    #useremail="ngModel" [ngClass]="{ 'is-invalid': f.submitted && useremail.errors }" />
+                <div *ngIf="f.submitted && useremail.errors" class="invalid-feedback">
+                    <div *ngIf="useremail.errors['required']">Email is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-control" name="userpassword" [(ngModel)]="password" required
+                    minlength="3" maxlength="20" #userpassword="ngModel"
+                    [ngClass]="{ 'is-invalid': f.submitted && userpassword.errors }" />
+                <div *ngIf="f.submitted && userpassword.errors" class="invalid-feedback">
+                    <div *ngIf="userpassword.errors['required']">Password is required</div>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Login</button>
+                <button type="button" (click)="onReset(f)" class="btn btn-warning float-right">
+                    Reset
+                </button>
+            </div>
+            <div class="form-group">
+                <span>{{errMsg}}</span>
+            </div>
+        </form>
+    </div>
+</div>

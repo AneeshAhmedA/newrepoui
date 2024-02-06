@@ -1,0 +1,28 @@
+<div>
+    <h2>Order Management</h2>
+    <button class="btn btn-primary" (click)="getAllOrders()">Show All Orders</button>
+  </div>
+  
+  <div *ngIf="orders.length > 0">
+    <table class="table table-bordered mt-3">
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Order Date</th>
+          <th>Total Price</th>
+          
+          <!-- Add more columns as needed -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders">
+          <td>{{ order.orderId }}</td>
+          <td>{{ order.orderDate | date: 'medium' }}</td>
+          <td>{{ order.totalPrice | currency:'INR' }}</td>
+          <!-- <td>{{ order.status }}</td> -->
+          <!-- Add more cells as needed -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

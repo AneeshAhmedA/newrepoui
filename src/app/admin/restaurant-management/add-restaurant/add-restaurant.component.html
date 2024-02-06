@@ -1,0 +1,32 @@
+<div class="container">
+  <table class="table">
+    <tr>
+      <td>Enter Name</td>
+      <td>
+        <input type="text" name="" id="" [(ngModel)]="restaurant.name">
+      </td>
+    </tr>
+    <tr>
+      <td>Enter Description</td>
+      <td>
+        <input type="text" name="" id="" [(ngModel)]="restaurant.description">
+      </td>
+    </tr>
+    <tr>
+      <td>Enter City ID</td>
+      <td>
+        <input type="number" name="" id="" [(ngModel)]="restaurant.cityId">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <app-restupload></app-restupload>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <button (click)="addRestaurant()">Save</button>
+      </td>
+    </tr>
+  </table>
+</div>

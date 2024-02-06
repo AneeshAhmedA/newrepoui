@@ -1,0 +1,30 @@
+<div *ngIf="isUserExist" class="container">
+    <h2>User Details</h2>
+    <p>User ID: {{ user.userID }}</p>
+    <p>Name: {{ user.name }}</p>
+  
+    <h2>Orders</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Restaurant ID</th>
+          <th>Menu Item ID</th>
+          <th>Order Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders">
+          <td>{{ order.orderId }}</td>
+          <td>{{ order.restaurantId }}</td>
+          <td>{{ order.MenuItemId }}</td>
+          <td>{{ order.orderDate | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div *ngIf="!isUserExist" class="container">
+    <p>{{ errMsg }}</p>
+  </div>
+  

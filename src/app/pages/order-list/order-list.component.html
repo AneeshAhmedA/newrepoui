@@ -1,0 +1,45 @@
+<div class="container">
+  <h2>Your Orders</h2>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Quantity</th>
+        <th>Order Date</th>
+        <th>Total Price</th>
+        <th>Action</th> <!-- Added a column for the "Select Order" button -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td>{{ order.orderId }}</td>
+        <td>{{ order.quantity }}</td>
+        <td>{{ order.orderDate | date: 'medium' }}</td>
+        <td>{{ order.totalPrice | currency:'INR' }}</td>
+        <td>
+          <button (click)="selectOrderForCoupon(order)">Select Order</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="coupon-section" *ngIf="selectedOrderForCoupon">
+    <label for="coupon">Select Coupon:</label>
+    <select id="coupon" [(ngModel)]="selectedCoupon">
+      <option *ngFor="let coupon of couponOptions" [ngValue]="coupon">{{ coupon.code }}</option>
+    </select>
+
+    <button (click)="applyCouponForSelectedOrder()">Apply Coupon</button>
+  </div>
+
+  <div>
+    <p>Total Amount: <span *ngIf="!selectedCoupon || discountedAmount === 0">{{ totalAmount | currency:'INR' }}</span></p>
+    <p *ngIf="selectedCoupon && discountedAmount > 0">
+      Old Amount: <del class="del-text">{{ oldTotalAmount | currency:'INR' }}</del>
+      Discounted Amount: {{ discountedAmount | currency:'INR' }}
+    </p>
+  </div>
+
+  <button (click)="performDummyPayment()">Initiate Payment</button>
+</div>

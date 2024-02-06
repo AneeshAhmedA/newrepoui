@@ -1,0 +1,44 @@
+<div class="container">
+    <table class="table">
+        <tr>
+            <td>Enter Name</td>
+            <td>
+                <input type="text" name="" id="" [(ngModel)]="menu.name">
+            </td>
+        </tr>
+        <tr>
+            <td>Enter Description</td>
+            <td>
+                <input type="text" name="" id="" [(ngModel)]="menu.description">
+            </td>
+        </tr>
+        <tr>
+            <td>Enter Quantity</td>
+            <td>
+                <input type="number" name="" id="" [(ngModel)]="menu.quantity">
+            </td>
+        </tr>
+        <tr>
+            <td>Enter Price</td>
+            <td>
+                <input type="number" name="" id="" [(ngModel)]="menu.price">
+            </td>
+        </tr>
+        <tr>
+            <td>Enter restaurantId</td>
+            <td>
+                <input type="number" name="" id="" [(ngModel)]="menu.restaurantId">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <app-upload></app-upload>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button (click)="addMenu()">Save</button>
+            </td>
+        </tr>
+    </table>
+</div>

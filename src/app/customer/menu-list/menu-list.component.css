@@ -1,0 +1,40 @@
+.order-summary-card {
+  /* Add additional styles to enhance the appearance of the order summary card */
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 20px; /* Add margin at the top */
+  transition: transform 0.3s ease-in-out; /* Add a subtle animation on hover */
+}
+
+.order-summary-card:hover {
+  transform: scale(1.05); /* Enlarge the card on hover for a subtle zoom effect */
+}
+
+.order-summary-card .card-body {
+  padding: 15px;
+}
+
+.order-summary-card .order-item {
+  border-bottom: 1px solid #eee; /* Add a border between order items */
+  padding: 10px 0; /* Add some vertical padding */
+}
+
+.order-summary-card .order-item:last-child {
+  border-bottom: none; /* Remove border from the last order item */
+}
+
+.order-summary-card .btn {
+  width: 100%; /* Make the button full-width */
+  margin-top: 10px; /* Add some space above the button */
+}
+
+.order-summary-card h5 {
+  color: #333; /* Customize the title color */
+  font-size: 1.5rem; /* Increase the font size of the title */
+  margin-bottom: 10px; /* Add space below the title */
+}
+
+.order-summary-card p {
+  color: #666; /* Customize the text color */
+}

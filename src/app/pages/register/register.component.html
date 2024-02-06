@@ -1,0 +1,78 @@
+<!-- register-form.component.html -->
+
+<div class="register-form">
+    <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()">
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" class="form-control" name="username" [(ngModel)]="user.name" required minlength="6"
+                maxlength="20" #username="ngModel" [ngClass]="{ 'is-invalid': f.submitted && username.errors }" />
+            <div *ngIf="f.submitted && username.errors" class="invalid-feedback">
+                <div *ngIf="username.errors['required']">Username is required</div>
+                <div *ngIf="username.errors['minlength']">
+                    Username must be at least 6 characters
+                </div>
+                <div *ngIf="username.errors['maxlength']">
+                    Username must be at most 20 characters
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" class="form-control" name="email" [(ngModel)]="user.email" required email
+                #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.errors }" />
+            <div *ngIf="f.submitted && email.errors" class="invalid-feedback">
+                <div *ngIf="email.errors['required']">Email is required</div>
+                <div *ngIf="email.errors['email']">Email is invalid</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Mobile</label>
+            <input type="text" pattern="[6-9][0-9]{9}" class="form-control" name="mobile" [(ngModel)]="user.mobile"
+                required #mobile="ngModel" [ngClass]="{ 'is-invalid': f.submitted && mobile.errors }" />
+            <div *ngIf="f.submitted && mobile.errors" class="invalid-feedback">
+                <div *ngIf="mobile.errors['required']">Mobile no is required</div>
+                <div *ngIf="mobile.errors['pattern']">Invalid Mobile No</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control" name="password" [(ngModel)]="user.password" required
+                minlength="6" maxlength="40" #password="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && password.errors }" />
+            <div *ngIf="f.submitted && password.errors" class="invalid-feedback">
+                <div *ngIf="password.errors['required']">Password is required</div>
+                <div *ngIf="password.errors['minlength']">
+                    Password must be at least 6 characters
+                </div>
+                <div *ngIf="password.errors['maxlength']">
+                    Password must not exceed 40 characters
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Role</label>
+            <select class="form-control" name="role" [(ngModel)]="user.role" required #role="ngModel"
+                    [ngClass]="{ 'is-invalid': f.submitted && role.errors }">
+                <option value="" disabled>Select Role</option>
+                <option value="Admin">Admin</option>
+                <option value="User">User</option>
+                <option value="DeliveryPartner">Delivery Partner</option>
+                <option value="Restaurant">Restaurant</option>
+            </select>
+            <div *ngIf="f.submitted && role.errors" class="invalid-feedback">
+                <div *ngIf="role.errors['required']">Role is required</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Register</button>
+            <button type="button" (click)="onReset(f)" class="btn btn-warning float-right">
+                Reset
+            </button>
+        </div>
+    </form>
+</div>

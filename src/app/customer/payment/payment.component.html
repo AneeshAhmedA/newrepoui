@@ -1,0 +1,13 @@
+<div class="payment-container">
+    <h2>Total Price: ${{ totalPrice }}</h2>
+  
+    <label for="coupon">Select Coupon:</label>
+    <select id="coupon" [(ngModel)]="selectedCoupon">
+      <option *ngFor="let coupon of couponOptions" [ngValue]="coupon">{{ coupon.code }}</option>
+    </select>
+  
+    <button (click)="applyCoupon()">Apply Coupon</button>
+  
+    <button (click)="proceedToPayment()">Proceed to Payment</button>
+  </div>
+  

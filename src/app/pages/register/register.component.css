@@ -1,0 +1,32 @@
+/* Add this to your global styles or component-specific styles */
+
+.register-form {
+  max-width: 400px; /* Adjust the maximum width as needed */
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.btn-primary {
+  width: 100%; /* Make the "Register" button full-width within its container */
+}
+
+.btn-warning {
+  width: 100%; /* Make the "Reset" button full-width within its container */
+}
+
+/* Optional: Add some spacing between form elements */
+.form-group label {
+  margin-bottom: 8px;
+}
+
+/* Optional: Style the error messages */
+.invalid-feedback {
+  color: #dc3545; /* Bootstrap's default danger color */
+}

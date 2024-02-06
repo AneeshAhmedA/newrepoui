@@ -1,0 +1,6 @@
+<!-- menu-search.component.html -->
+
+<input type="text" [formControl]="searchControl" placeholder="Search...">
+<ul *ngIf="suggestions.length > 0">
+  <li *ngFor="let suggestion of suggestions">{{ suggestion.name }}</li>
+</ul>
