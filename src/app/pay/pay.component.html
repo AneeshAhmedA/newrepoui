@@ -1,0 +1,93 @@
+<div class="container">
+    <form id="paymentForm" (ngSubmit)="onSubmit()" [formGroup]="paymentForm">
+        <div class="row">
+            <!-- Billing Address -->
+            <div class="col">
+                <h3 class="title">Billing Address</h3>
+                <!-- Full Name -->
+                <div class="inputBox">
+                    <label for="name">Full Name:</label>
+                    <input type="text" id="name" placeholder="Enter your full name" formControlName="name">
+                    <div class="invalid-feedback" *ngIf="paymentForm.get('name')?.invalid && paymentForm.get('name')?.dirty">Please enter your full name.</div>
+                </div>
+                <!-- Email -->
+                <div class="inputBox">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" placeholder="Enter email address" formControlName="email">
+                    <div class="invalid-feedback" *ngIf="paymentForm.get('email')?.invalid && paymentForm.get('email')?.dirty">Please enter a valid email address.</div>
+                </div>
+                <!-- Address -->
+                <div class="inputBox">
+                    <label for="address">Address:</label>
+                    <input type="text" id="address" placeholder="Enter address" formControlName="address">
+                    <div class="invalid-feedback" *ngIf="paymentForm.get('address')?.invalid && paymentForm.get('address')?.dirty">Please enter your address.</div>
+                </div>
+                <!-- City, State, Zip -->
+                <div class="flex">
+                    <div class="inputBox">
+                        <label for="city">City:</label>
+                        <input type="text" id="city" placeholder="Enter city" formControlName="city">
+                        <div class="invalid-feedback" *ngIf="paymentForm.get('city')?.invalid && paymentForm.get('city')?.dirty">Please enter your city.</div>
+                    </div>
+                    <div class="inputBox">
+                        <label for="state">State:</label>
+                        <input type="text" id="state" placeholder="Enter state" formControlName="state">
+                        <div class="invalid-feedback" *ngIf="paymentForm.get('state')?.invalid && paymentForm.get('state')?.dirty">Please enter your state.</div>
+                    </div>
+                    <div class="inputBox">
+                        <label for="zip">Zip Code:</label>
+                        <input type="text" id="zip" placeholder="Enter zip code" formControlName="zip">
+                        <div class="invalid-feedback" *ngIf="paymentForm.get('zip')?.invalid && paymentForm.get('zip')?.dirty">Please enter a valid zip code.</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Payment Details -->
+            <div class="col">
+                <h3 class="title">Payment</h3>
+                <!-- Card Name -->
+                <div class="inputBox">
+                    <label for="cardName">Name On Card:</label>
+                    <input type="text" id="cardName" placeholder="Enter card name" formControlName="cardName">
+                    <div class="invalid-feedback" *ngIf="paymentForm.get('cardName')?.invalid && paymentForm.get('cardName')?.dirty">Please enter the name on your card.</div>
+                </div>
+                <!-- Card Number -->
+                <div class="inputBox">
+                    <label for="cardNum">Credit Card Number:</label>
+                    <input type="text" id="cardNum" placeholder="1111-2222-3333-4444" formControlName="cardNum">
+                    <div class="invalid-feedback" *ngIf="paymentForm.get('cardNum')?.invalid && paymentForm.get('cardNum')?.dirty">Please enter a valid credit card number.</div>
+                </div>
+                <!-- Expiry Month -->
+                <div class="inputBox">
+                    <label for="expMonth">Exp Month:</label>
+                    <select id="expMonth" formControlName="expMonth">
+                        <option value="">Choose month</option>
+                        <option value="January">January</option>
+                        <!-- other months -->
+                    </select>
+                    <div class="invalid-feedback" *ngIf="paymentForm.get('expMonth')?.invalid && paymentForm.get('expMonth')?.dirty">Please select the expiration month.</div>
+                </div>
+                <!-- Expiry Year and CVV -->
+                <div class="flex">
+                    <div class="inputBox">
+                        <label for="expYear">Exp Year:</label>
+                        <select id="expYear" formControlName="expYear">
+                            <option value="">Choose year</option>
+                            <!-- other years -->
+                        </select>
+                        <div class="invalid-feedback" *ngIf="paymentForm.get('expYear')?.invalid && paymentForm.get('expYear')?.dirty">Please select the expiration year.</div>
+                    </div>
+                    <div class="inputBox">
+                        <label for="cvv">CVV:</label>
+                        <input type="text" id="cvv" placeholder="123" formControlName="cvv">
+                        <div class="invalid-feedback" *ngIf="paymentForm.get('cvv')?.invalid && paymentForm.get('cvv')?.dirty">Please enter a valid CVV.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="submit" value="Proceed to Checkout" class="submit_btn">
+    </form>
+    <!-- Success Message -->
+    <div *ngIf="paymentSuccess" class="success-message">
+        Payment successful!
+    </div>
+</div>

@@ -29,6 +29,7 @@ import { CitySortingComponent } from './customer/city-sorting/city-sorting.compo
 import { RestaurantListComponent } from './customer/restaurant-list/restaurant-list.component';
 import { RestuploadComponent } from './restupload/restupload.component';
 import { MenuListComponent } from './customer/menu-list/menu-list.component';
+import { PayComponent } from './pay/pay.component';
 
 
 
@@ -49,6 +50,8 @@ export const routes: Routes = [
   {path:'restaurant-list',component:RestaurantListComponent},
   {path:'upload-res',component:RestuploadComponent},
   {path:'menu-items/:rid',component:MenuListComponent},
+  {path:'viewcart',component:ViewCartComponent},
+  {path:'pay',component:PayComponent},
 
   
     {path: 'user-dashboard',
@@ -62,6 +65,8 @@ export const routes: Routes = [
       {path:'city-sorting',component:CitySortingComponent},
       {path:'restaurant-list',component:RestaurantListComponent},
       {path:'menu-items/:rid',component:MenuListComponent},
+      {path:'pay',component:PayComponent},
+
     ]
   },
 

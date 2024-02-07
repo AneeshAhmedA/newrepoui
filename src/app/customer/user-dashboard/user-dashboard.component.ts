@@ -10,11 +10,21 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
   templateUrl: './user-dashboard.component.html',
   styleUrl: './user-dashboard.component.css'
 })
-export class UserDashboardComponent {
-  constructor(private router: Router){}
-  logout():void{
+export class UserDashboardComponent implements OnInit {
+  showSidebar: boolean = false;
+
+  constructor(private router: Router) {}
+
+  ngOnInit() {
+    // Initialization code goes here
+  }
+
+  toggleSidebar() {
+    this.showSidebar = !this.showSidebar;
+  }
+
+  logout(): void {
     localStorage.clear();
     this.router.navigateByUrl('login');
   }
-
 }

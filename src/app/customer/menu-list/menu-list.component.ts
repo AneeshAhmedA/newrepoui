@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Menuitem } from '../../Models/menuitem';
 import { Res } from '../../Models/res';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { OrderDTO } from '../../Models/order-dto';
+import { Order } from '../../Models/order';
 
 @Component({
   selector: 'app-menu-list',
@@ -13,41 +15,45 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./menu-list.component.css'],
   imports: [FormsModule, CommonModule,HttpClientModule],
 })
-export class MenuListComponent {
+export class MenuListComponent implements OnInit {
   rid?: number;
   rname?: string;
   selectedRestaurant: Res;
-  menuItems: Menuitem[] = [];
   filteredMenuItems: Menuitem[] = [];
-  quantityOptions: number[] = [1, 2, 3];
-  orderItems: Menuitem[] = []; // Array to store the current order
-  userId: string | null = null; // Initialize userId to null
+  orderItems: OrderDTO[] = [];
+  orderItem:OrderDTO ;
+  userId: string | null = null;
+  quantityOptions: number[] = [1, 2, 3]; // Include 0 as an option
+
+  order:boolean=true;
+
+  orderPlacementSuccess: boolean = false;
+  menuItem:any;
 
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router
   ) {
+    this.orderItem=new OrderDTO();
     this.route.params.subscribe((p) => (this.rid = p['rid']));
-    console.log(this.rid);
     this.selectedRestaurant = new Res();
     this.http
       .get<Res>('http://localhost:5145/api/Restaurant/' + this.rid)
       .subscribe((response) => {
-        console.log(response);
+        console.log(response)
         this.selectedRestaurant = response;
         this.rname = this.selectedRestaurant.name;
-        console.log(this.rname);
-
         this.getFilteredMenuItems();
       });
-    
-    // Retrieve userId from localStorage
+
     this.userId = localStorage.getItem('userId');
   }
 
+  ngOnInit(): void {
+  }
+
   getFilteredMenuItems() {
-    console.log(this.selectedRestaurant);
     if (this.selectedRestaurant) {
       this.http
         .get<Menuitem[]>(
@@ -57,16 +63,15 @@ export class MenuListComponent {
         )
         .subscribe(
           (response) => {
-            this.menuItems = response.map((menuItem) => ({
+            console.log(response)
+            this.filteredMenuItems = response.map((menuItem) => ({
+              id:menuItem.menuItemId,
               name: menuItem.name,
               description: menuItem.description,
               price: menuItem.price,
-              menuItemId: menuItem.menuItemId,
-              quantity: menuItem.quantity,
-              image: menuItem.image,
+              quantity: 1,
+              image: menuItem.image
             }));
-            console.log('Fetched Menu Items:', this.menuItems);
-            this.filteredMenuItems = this.menuItems;
           },
           (error) => {
             console.error(
@@ -78,49 +83,100 @@ export class MenuListComponent {
     }
   }
 
-  getRestaurantImage(m: any) {
-    console.log(m);
-    // Replace 'http://localhost:5145/Resources/Images/' with the actual base URL for restaurant images
+  getRestaurantImage(m: string) {
     return `http://localhost:5145/Resources/Images/${m}`;
   }
 
-  addToOrder(menuItem: Menuitem) {
-    this.orderItems.push(menuItem);
-  }
-
-  submitOrder() {
-    if (!this.userId) {
-      console.error('User ID not found.');
-      return;
-    }
-
-    const order = {
-      userId: this.userId,
-      items: this.orderItems,
-      // Add any other properties you need for the order
+  addToOrder(MenuItem: Menuitem) {
+    this.menuItem = MenuItem;
+    let orderID: number;
+    const userId = localStorage.getItem('userId');
+    
+    // Prepare order data
+    const orderData = {
+      userId: userId,
+      restaurantId: this.selectedRestaurant?.restaurantId,
+      menuItemId: this.menuItem.id,
+      orderDate: new Date(),
+      quantity: this.menuItem.quantity,
+      totalPrice: this.menuItem.quantity * this.menuItem.price,
     };
 
-    this.http.post('http://localhost:5145/api/Order', order).subscribe(
-      (response) => {
-        console.log('Order submitted successfully:', response);
-        this.orderItems = [];
-        this.navigateToOrderList();
+    // Send order data to the server
+    this.http.post('http://localhost:5145/api/Order', orderData).subscribe(
+      (response: any) => {
+        orderID = response;
+        // Create a copy of the menu item and assign order ID
+        const menuItemCopy: Menuitem = {
+          ...this.menuItem,
+          orderId: orderID
+        };
+        menuItemCopy.price=orderData.totalPrice;
+        // Add the copied menu item to the order
+        this.orderItems.push(menuItemCopy);
+        
+        console.log('Order placed successfully:', response);
+        this.orderPlacementSuccess = true;
+        setTimeout(() => {
+          this.orderPlacementSuccess = false;
+          // Redirect to the order list page
+          // this.router.navigate(['user-dashboard', 'order-list']);
+        }, 50);
       },
       (error) => {
-        console.error('Error submitting order:', error);
+        console.error('Error placing order', error);
       }
     );
-  }
+    console.log(this.orderItems);
+    // Reset the quantity of the original menu item to its default value
+   // this.menuItem.quantity = 1;
+   this.calculateTotalOrderPrice();
+}
 
-  navigateToOrderList() {
-    this.router.navigate(['/order-list']);
-  }
 
-  calculateTotalOrderPrice(): number {
-    let totalPrice = 0;
-    for (const orderItem of this.orderItems) {
-      totalPrice += orderItem.quantity * orderItem.price;
+  removeItemFromOrder(orderId: any) {
+      const index = this.orderItems.findIndex(item => item.orderId === orderId);
+      if (index !== -1) {
+        this.http.delete('http://localhost:5145/api/Order/' + orderId).subscribe(
+          (response: any) => {
+            this.orderItems.splice(index, 1);
+            console.log('Order item deleted successfully');
+          },
+          (error) => {
+            console.error('Error deleting order item', error);
+          }
+        );
+      } else {
+        console.error('Order item not found in the list');
+      }
     }
-    return totalPrice;
+    
+    submitOrder() {   
+      this.order=false;
+      console.log(this.orderItems)
+    // this.router.navigate(['user-dashboard/pay']);
+}
+placeOrder(){
+  this.router.navigate(['user-dashboard/pay']);
+}
+  calculateTotalOrderPrice(): number {
+  let totalPrice = 0;
+  for (let orderItem of this.orderItems) {
+    if (orderItem.price !== undefined) {
+      totalPrice += orderItem.price;
+    }
+  }
+  return totalPrice;
+}
+
+
+  increaseQuantity(menuItem: Menuitem) {
+    menuItem.quantity++;
+  }
+
+  decreaseQuantity(menuItem: Menuitem) {
+    if (menuItem.quantity > 1) {
+      menuItem.quantity--;
+    }
   }
 }

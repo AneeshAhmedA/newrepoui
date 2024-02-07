@@ -1,0 +1,45 @@
+/* restaurant-list.component.css */
+
+/* Restaurant Card */
+.card {
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    transition: box-shadow 0.3s ease;
+    height: 100%; /* Set height to occupy full container height */
+}
+
+.card:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    width: 100%; /* Ensure image takes full width of container */
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Set height to occupy full container height */
+}
+
+.card-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.card-text {
+    flex-grow: 1;
+}
+
+/* Button */
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
